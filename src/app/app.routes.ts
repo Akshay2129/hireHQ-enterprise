@@ -73,11 +73,11 @@ export const routes: Routes = [
             }
         ],
     },
-    {
-        path: ':type',
-        component: TermConditionComponent
+    // {
+    //     path: ':type',
+    //     component: TermConditionComponent
 
-    },
+    // },
     { path: '', pathMatch: 'full', redirectTo: 'auth/login' },
     { path: '**', pathMatch: 'full', redirectTo: 'auth/login' },
 ];

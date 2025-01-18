@@ -1,0 +1,144 @@
+<div class="sm:col-span-12 md:col-span-6 flex items-center h-screen overflow-y-auto">
+  <div class="w-full px-4 sm:px-6 md:py-3 lg:px-16 overflow-hidden max-w-full">
+    <!-- Header -->
+    <h1 class="font-bold text-lg sm:text-xl md:text-2xl lg:text-xl ml-1 text-blue-950">
+      hireHQ<span class="text-orange-600 font-bold text-2xl sm:text-4xl lg:text-4xl">.</span>
+    </h1>
+    <h1 class="text-base sm:text-lg md:text-xl lg:text-1xl font-semibold text-gray-900 mt-1">
+      Create your enterprise account
+    </h1>
+    <p class="text-gray-600 text-sm sm:text-base mt-1 mb-6">
+      To explore, create a new account
+    </p>
+
+    <!-- Form -->
+    <form class="space-y-2" [formGroup]="loginForm">
+      <!-- Enterprise Name -->
+      <div>
+        <label for="enterpriseName" class="block text-sm font-medium text-gray-700">
+          Enterprise Name
+        </label>
+        <input type="text" id="enterpriseName" formControlName="establishment_name"
+          class="mt-1 block w-full px-3 py-2 border focus:outline-none focus:border-gray-600 rounded-lg text-gray-900"
+          placeholder="Enter enterprise name" />
+          <span class="text-red-500 text-sm" *ngIf="establishment_name && establishment_name.invalid && establishment_name.touched">please enter enterprise name</span>
+      </div>
+
+      <!-- Email and Domain -->
+      <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-4">
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">
+            Email Address
+          </label>
+          <input type="email" id="email" formControlName="email"
+            class="mt-1 block w-full px-3 py-2 border focus:outline-none focus:border-gray-600 rounded-lg text-gray-900"
+            placeholder="Enter email address" />
+            <span class="text-red-500 text-sm" *ngIf="email && email.invalid && email.touched">please enter email address</span>
+        </div>
+
+        <div>
+          <label for="domainName" class="block text-sm font-medium text-gray-700">
+            Domain Name
+          </label>
+          <input type="text" id="domainName" formControlName="domain_name" (input)="onDomainInputChange()"
+            class="mt-1 block w-full px-3 py-2 border focus:outline-none focus:border-gray-600 rounded-lg text-gray-900"
+            placeholder="Enter domain name" />
+            <span class="text-red-500 text-sm" *ngIf="domain_name && domain_name.invalid && domain_name.touched">please enter domain name</span>
+        </div>
+      </div>
+
+      <!-- Checkbox -->
+      <div class="flex items-center">
+        <input id="sameDomain" type="checkbox" formControlName="sameDomain" (change)="onCheckboxChange($event)"
+          class="h-4 w-4 text-indigo-600 focus:outline-none focus:border-gray-600 rounded-lg" />
+        <label for="sameDomain" class="ml-2 block text-sm text-gray-800">
+          Same as email address domain
+        </label>
+      </div>
+
+
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">
+          Password
+        </label>
+        <div class="relative">
+          <input [type]="isPasswordVisible ? 'text' : 'password'" id="password" formControlName="password"
+            class="mt-1 block w-full px-3 py-2 border focus:outline-none focus:border-gray-600 rounded-lg text-gray-900"
+            placeholder="Enter password" />
+          <button type="button" class="absolute right-3 top-2.5 text-gray-500 focus:outline-none"
+            (click)="togglePasswordVisibility()">
+            <i [class]="isPasswordVisible ? 'pi pi-eye text-gray-400' : 'pi pi-eye-slash text-gray-400'"></i>
+          </button>
+          <div class="relative ">
+            <span class="text-red-500 text-sm" *ngIf="password?.hasError('minlength') && password?.touched">
+              Password must be at least 8 characters
+            </span>
+            <span class="text-red-500 text-sm" *ngIf="password?.hasError('required') && password?.touched">
+              Please enter a password
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Name and Designation -->
+      <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-4">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">
+            Your Name
+          </label>
+          <input type="text" id="name" formControlName="fullname"
+            class="mt-1 block w-full px-3 py-2 border focus:outline-none focus:border-gray-600 rounded-lg text-gray-900"
+            placeholder="Enter your name" />
+            <span class="text-red-500 text-sm" *ngIf="fullname && fullname.invalid && fullname.touched">please enter fullname</span>
+        </div>
+
+        <div>
+          <label for="designation" class="block text-sm font-medium text-gray-700">
+            Designation
+          </label>
+          <input type="text" id="designation" formControlName="designation"
+            class="mt-1 block w-full px-3 py-2 border focus:outline-none focus:border-gray-600 rounded-lg text-gray-900"
+            placeholder="Enter designation" />
+            <span class="text-red-500 text-sm" *ngIf="designation && designation.invalid && designation.touched">please enter designation</span>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="">
+        <button type="submit" (click)="onClickLogin()"
+        class="w-full bg-indigo-950 text-white text-sm font-medium py-2  rounded-lg hover:bg-indigo-700">
+        Sign Up
+      </button>
+      </div>
+    </form>
+
+    <!-- Terms and Links -->
+    <div class="text-center mt-2">
+      <p class="text-gray-500 text-xs sm:text-sm">
+        By clicking sign up, you agree to our Terms of Use and Privacy Policy
+        <br />
+        Already registered? <span class="text-blue-950 hover:underline cursor-pointer" (click)="signin()">Sign in</span>
+      </p>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="flex justify-center items-center space-x-2 text-xs text-gray-500 mt-2">
+      <a href="/terms-of-use" target="_blank" class="cursor-pointer hover:underline">
+        Terms of Use
+      </a>
+      <span>•</span>
+      <a href="/privacypolicy" target="_blank" class="pl-3 cursor-pointer hover:underline">
+        Privacy Policy
+      </a>
+      <span>•</span>
+      <a href="/cookiepolicy" target="_blank" class="pl-3 cursor-pointer hover:underline">
+        Cookie Policy
+      </a>
+    </div>
+    <div class="text-center text-xs text-gray-500 mt-2">
+      <p>2022 hireHQ. All rights reserved worldwide</p>
+    </div>
+  </div>
+</div>

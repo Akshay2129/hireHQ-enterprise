@@ -1,0 +1,122 @@
+<!-- Progress Bar -->
+<!-- <button class="text-sm text-indigo-950 hover:underline focus:outline-none ml-5 mb-5" type="button">
+    <i class="fa-solid fa-arrow-left mr-2"></i>Back To Jobs
+</button>
+<div class="p-4 border bg-white border-b-0 border-gray-400 rounded-t-lg">
+    <div class="flex flex-wrap items-center space-y-4 md:space-y-0">
+        <div class="flex items-center space-x-2 flex-1">
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-indigo-950 text-white shrink-0">1</div>
+            <span class="text-indigo-950 font-semibold">Basic Job Details</span>
+        </div>
+        <div class="hidden md:block w-12 border-t-2 border-gray-300"></div>
+        <div class="flex items-center space-x-2 flex-1">
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 text-gray-600 shrink-0">2</div>
+            <span class="text-gray-600">Job Description</span>
+        </div>
+        <div class="hidden md:block w-12 border-t-2 border-gray-300"></div>
+        <div class="flex items-center space-x-2 flex-1">
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 text-gray-600 shrink-0">3</div>
+            <span class="text-gray-600">Qualification and Requirements</span>
+        </div>
+        <div class="hidden md:block w-12 border-t-2 border-gray-300"></div>
+        <div class="flex items-center space-x-2 flex-1">
+            <div class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 text-gray-600 shrink-0">4</div>
+            <span class="text-gray-600">Other Details</span>
+        </div>
+    </div>
+</div>
+
+<app-job-basic-details></app-job-basic-details> -->
+<!-- Progress Bar -->
+<button class="text-sm text-indigo-950 hover:underline focus:outline-none ml-5 mb-5" type="button"
+    (click)="backToJob()">
+    <i class="fa-solid fa-arrow-left mr-2"></i>Back To Jobs
+</button>
+
+<div class="p-4 border  bg-white border-b-1 border-gray-400 rounded-t-lg">
+    <div class="flex flex-wrap items-center space-y-4 md:space-y-0">
+        <!-- Step 1 -->
+        <div class="flex items-center space-x-2 flex-1">
+            <div class="w-8 h-8 flex items-center justify-center rounded-full"
+                [ngClass]="currentStep > 1 ? 'bg-green-500' : 'bg-indigo-950'">
+                <span class="text-white">1</span>
+            </div>
+            <span [ngClass]="currentStep > 1 ? 'text-green-500' : 'text-indigo-950'" class="font-semibold">Basic Job
+                Details</span>
+        </div>
+
+        <!-- Line after Step 1 -->
+        <div class="w-12 border-t-2" [ngClass]="currentStep > 1 ? 'border-green-500' : 'border-gray-300'">
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex items-center space-x-2 flex-1">
+            <div class="w-8 h-8 flex items-center justify-center rounded-full"
+                [ngClass]="currentStep > 2 ? 'bg-green-500' : currentStep === 2 ? 'bg-indigo-950' : 'bg-gray-300'">
+                <span class="text-white">2</span>
+            </div>
+            <span
+                [ngClass]="currentStep > 2 ? 'text-green-500' : currentStep === 2 ? 'text-indigo-950' : 'text-gray-600'">Job
+                Description</span>
+        </div>
+
+        <!-- Line after Step 2 -->
+        <div class="w-12 border-t-2" [ngClass]="currentStep > 2 ? 'border-green-500' : 'border-gray-300'">
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flex items-center space-x-2 flex-1">
+            <div class="w-8 h-8 flex items-center justify-center rounded-full"
+                [ngClass]="currentStep > 3 ? 'bg-green-500' : currentStep === 3 ? 'bg-indigo-950' : 'bg-gray-300'">
+                <span class="text-white">3</span>
+            </div>
+            <span
+                [ngClass]="currentStep > 3 ? 'text-green-500' : currentStep === 3 ? 'text-indigo-950' : 'text-gray-600'">Qualification
+                and Requirements</span>
+        </div>
+
+        <!-- Line after Step 3 -->
+        <div class="w-12 border-t-2" [ngClass]="currentStep > 3 ? 'border-green-500' : 'border-gray-300'">
+        </div>
+
+        <!-- Step 4 -->
+        <div class="flex items-center space-x-2 flex-1">
+            <div class="w-8 h-8 flex items-center justify-center rounded-full"
+                [ngClass]="currentStep > 4 ? 'bg-green-500' : currentStep === 4 ? 'bg-indigo-950' : 'bg-gray-300'">
+                <span class="text-white">4</span>
+            </div>
+            <span
+                [ngClass]="currentStep > 4 ? 'text-green-500' : currentStep === 4 ? 'text-indigo-950' : 'text-gray-600'">Other
+                Details</span>
+        </div>
+    </div>
+</div>
+
+ 
+<!-- Components -->
+<app-job-basic-details
+  *ngIf="currentStep === 1"
+  (formData)="handleFormData(1, $event)"
+  (nextClicked)="onNextClicked()"
+></app-job-basic-details>
+
+<app-job-description
+  *ngIf="currentStep === 2"
+  (formData)="handleFormData(2, $event)"
+  (nextClicked)="onNextClicked()"
+  (backClicked)="onBackClicked()"
+></app-job-description>
+
+<app-job-qualification
+  *ngIf="currentStep === 3"
+  (formData)="handleFormData(3, $event)"
+  (nextClicked)="onNextClicked()"
+  (backClicked)="onBackClicked()"
+></app-job-qualification>
+
+<app-job-other-details
+  *ngIf="currentStep === 4"
+  (formData)="handleFormData(4, $event)"
+  (nextClicked)="onNextClicked()"
+  (backClicked)="onBackClicked()"
+></app-job-other-details>

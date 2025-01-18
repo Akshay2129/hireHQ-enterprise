@@ -1,0 +1,54 @@
+<div class="relative overflow-x-auto scrollbar-hide border border-gray-300 rounded-lg shadow-sm bg-white">
+  <table class="min-w-[1200px] w-full table-fixed text-sm text-left text-gray-700 border-collapse">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="w-48 px-4 py-2 font-semibold sticky left-0 bg-gray-100 border-r border-gray-300">
+          Job Title
+        </th>
+        <th *ngFor="let column of visibleColumns"
+          class="w-40 px-4 py-2 font-semibold border-r border-gray-300 bg-gray-100">
+          {{ column }}
+        </th>
+        <th class="w-40 px-4 py-2 font-semibold sticky right-0 bg-gray-100 border-r border-gray-300">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let job of jobs" class="hover:bg-gray-50 transition-colors bg-white">
+        <td class="px-4 py-2 font-semibold text-gray-800 sticky left-0 bg-white">
+          {{ job.title }}
+        </td>
+        <td *ngFor="let column of visibleColumns" class="px-4 py-2 text-gray-800 bg-white">
+          <ng-container *ngIf="column === 'Job Manager'">
+            <div class="flex items-center">
+              <img *ngIf="job.managerImage" [src]="job.managerImage" alt="Manager Image"
+                class="w-8 h-8 rounded-full mr-2" />
+              <span>{{ job.jobmanager }}</span>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="column !== 'Job Manager' && column !== 'Status'">
+            {{ getJobValue(job, column) }}
+          </ng-container>
+          <ng-container *ngIf="column === 'Status'">
+            <span [ngClass]="{
+                        'px-[10px] py-1 text-xs font-semibold text-green-800 bg-green-200 rounded-lg': job.status === 'Open',
+                        'px-[12px] py-1 text-xs font-semibold text-red-800 bg-red-200 rounded-lg': job.status === 'Cancelled',
+                        'px-[11px] py-1 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded': job.status === 'Pending',
+                        'px-4 py-1 text-xs font-semibold text-purple-800 bg-purple-200 rounded': job.status === 'Hold'
+                      }">
+              {{ job.status }}
+            </span>
+          </ng-container>
+        </td>
+
+
+        <td class="px-4 py-3 sticky right-0 bg-white flex flex-wrap gap-4 items-center">
+          <a href="#" class="text-purple-800 hover:underline">Share</a>
+          <a href="#" class="text-purple-800 hover:underline">Edit</a>
+          <a href="#" class="text-purple-800 hover:underline">More</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

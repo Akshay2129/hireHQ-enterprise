@@ -1,0 +1,208 @@
+<div class="flex flex-col w-full p-4">
+    <div class="flex justify-between items-center mb-2">
+        <h3 class="text-sm font-bold">Jobs (24)</h3>
+        <div class="relative flex items-center gap-2">
+            <!-- Upload Button -->
+            <button
+                class="flex justify-center items-center w-12 h-10 bg-white border border-gray-300 rounded-md shadow-md ">
+                <img src="images/send.svg" alt="icon" class="w-5 h-5 text-purple-600 hover:text-white" />
+
+            </button>
+            <button
+                class="flex justify-center items-center w-12 h-10 bg-white border border-gray-300 rounded-md shadow-md ">
+                <img src="images/magic.svg" alt="icon" class="w-4 h-4 text-purple-600 hover:text-white" />
+
+            </button>
+
+            <button
+                class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-purple-900 hover:text-white flex items-center gap-2 group"
+                (click)="toggleUploadDropdown()">
+                Upload
+                <img src="images/dropdown.svg" alt="icon" class="w-3 h-3 text-purple-600 group-hover:text-white" />
+            </button>
+
+            <!-- Dropdown -->
+            <div *ngIf="uploadDropdownVisible"
+                class="absolute top-full  right-28 bg-white border border-gray-300 rounded-lg shadow-lg w-40 z-10">
+                <button class="block w-full px-4 py-1 text-left hover:bg-gray-100" (click)="uploadFile()">
+                    Upload File
+                </button>
+                <button class="block w-full px-4 py-1 text-left hover:bg-gray-100" (click)="viewJobLog()">
+                    View Job Log
+                </button>
+            </div>
+            <!-- Create Job Button -->
+            <button class="px-4 py-2 bg-purple-900 text-white rounded-lg" (click)="CreateJob()">
+                Create Job
+            </button>
+        </div>
+    </div>
+
+    <!-- Search and Filter -->
+    <div class="flex justify-between items-center">
+        <div class="w-1/3">
+            <input type="text" placeholder="Search"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none" />
+        </div>
+        <div class="flex">
+            <button class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-black">
+                <img src="images/sort.svg" alt="Sort Icon" class="h-4 w-4" />
+                Sort
+            </button>
+
+            <button class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-black"
+                (click)="openFilterSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707l-7 7v5a1 1 0 01-.553.894l-4 2A1 1 0 016 20v-5l-7-7A1 1 0 013 6V4z" />
+                </svg>
+                Filter
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div *ngIf="filterSidebarVisible" class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex justify-end">
+        <div class="bg-white h-full shadow-lg p-6 flex flex-col transition-transform transform w-full sm:w-96">
+            <div class="flex justify-between items-center mb-6">
+
+                <div class="flex items-center gap-4">
+                    <button (click)="closeFilterSidebar()" class="text-gray-600 hover:text-black text-3xl">
+                        &times;
+                    </button>
+                    <h2 class="text-xl font-semibold">Filters</h2>
+                </div>
+                <div class="flex gap-2">
+                    <button class="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                        Reset All
+                    </button>
+                    <button class="px-4 py-2 bg-indigo-900 text-white rounded-md text-sm">
+                        Apply
+                    </button>
+                </div>
+            </div>
+            <!-- status -->
+            <div class="flex flex-col gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Status</label>
+                    <div class="relative border border-gray-300 rounded-lg px-4 py-2 flex items-center flex-wrap gap-2">
+                        <span *ngFor="let status of selectedStatuses"
+                            class="px-2 py-1 bg-gray-100 rounded-lg flex items-center gap-1">
+                            {{ status }}
+                            <span class="text-gray-500 hover:text-red-500 cursor-pointer"
+                                (click)="removeItem('status', status)">
+                                &times;
+                            </span>
+                        </span>
+                        <span class="text-gray-400" *ngIf="selectedStatuses.length === 0">
+                            Select statuses
+                        </span>
+                        <span (click)="toggleDropdown('status')" class="ml-auto cursor-pointer text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </span>
+                        <div *ngIf="dropdownOpen['status']"
+                            class="absolute z-10 bg-white border border-gray-300 rounded-lg w-full"
+                            style="top: 100%; left: 0; margin-top: 4px;">
+                            <div *ngFor="let status of statusOptions"
+                                class="flex items-center px-4 py-2 hover:bg-gray-200">
+                                <span class="cursor-pointer flex-1" (click)="addItem('status', status)">
+                                    {{ status }}
+                                </span>
+                                <span class="text-red-500 cursor-pointer" *ngIf="selectedStatuses.includes(status)"
+                                    (click)="removeItem('status', status)">
+                                    &times;
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Type Dropdown -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Work Type</label>
+                    <div class="relative border border-gray-300 rounded-lg px-4 py-2 flex items-center flex-wrap gap-2">
+                        <span *ngFor="let workType of selectedWorkTypes"
+                            class="px-2 py-1 bg-gray-100 rounded-lg flex items-center gap-1">
+                            {{ workType }}
+                            <span class="text-gray-500 hover:text-red-500 cursor-pointer"
+                                (click)="removeItem('workType', workType)">
+                                &times;
+                            </span>
+                        </span>
+                        <span class="text-gray-400" *ngIf="selectedWorkTypes.length === 0">
+                            Select work types
+                        </span>
+                        <span (click)="toggleDropdown('workType')" class="ml-auto cursor-pointer text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </span>
+                        <div *ngIf="dropdownOpen['workType']"
+                            class="absolute z-10 bg-white border border-gray-300 rounded-lg w-full"
+                            style="top: 100%; left: 0; margin-top: 4px;">
+                            <div *ngFor="let workType of workTypeOptions"
+                                class="flex items-center px-4 py-2 hover:bg-gray-200">
+                                <span class="cursor-pointer flex-1" (click)="addItem('workType', workType)">
+                                    {{ workType }}
+                                </span>
+                                <span class="text-red-500 cursor-pointer" *ngIf="selectedWorkTypes.includes(workType)"
+                                    (click)="removeItem('workType', workType)">
+                                    &times;
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Dropdown -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Location</label>
+                    <div class="relative border border-gray-300 rounded-lg px-4 py-2 flex items-center flex-wrap gap-2">
+                        <span *ngFor="let location of selectedLocations"
+                            class="px-2 py-1 bg-gray-100 rounded-lg flex items-center gap-1">
+                            {{ location }}
+                            <span class="text-gray-500 hover:text-red-500 cursor-pointer"
+                                (click)="removeItem('location', location)">
+                                &times;
+                            </span>
+                        </span>
+
+                        <span class="text-gray-400" *ngIf="selectedLocations.length === 0">
+                            Select locations
+                        </span>
+                        <span (click)="toggleDropdown('location')" class="ml-auto cursor-pointer text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </span>
+                        <div *ngIf="dropdownOpen['location']"
+                            class="absolute z-10 bg-white border border-gray-300 rounded-lg w-full"
+                            style="top: 100%; left: 0; margin-top: 4px;">
+                            <div *ngFor="let location of locationOptions"
+                                class="flex items-center px-4 py-2 hover:bg-gray-200">
+                                <span class="cursor-pointer flex-1" (click)="addItem('location', location)">
+                                    {{ location }}
+                                </span>
+                                <span class="text-red-500 cursor-pointer" *ngIf="selectedLocations.includes(location)"
+                                    (click)="removeItem('location', location)">
+                                    &times;
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<app-table [jobs]="jobList" (share)="handleShare($event)" (edit)="handleEdit($event)"
+    (more)="handleMore($event)"></app-table>

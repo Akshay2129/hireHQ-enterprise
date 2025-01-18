@@ -1,0 +1,50 @@
+<div class="fixed w-full bg-white top-0">
+  <div class="py-2 w-full ml-12">
+
+    <div class="w-32">
+      <img src="images/logo.png" alt="logo">
+    </div>
+
+
+    <div class="flex space-x-4">
+      <button (click)="navigateTo('terms-of-use')"
+        class="px-1 py-2 text-black font-semibold border-b-2 transition-colors duration-300"
+        [class.border-black]="currentType === 'terms-of-use'"
+        [class.border-transparent]="currentType !== 'terms-of-use'">
+        Terms of Use
+      </button>
+      <button (click)="navigateTo('privacypolicy')"
+        class="px-1 py-2 text-black font-semibold border-b-2 transition-colors duration-300"
+        [class.border-black]="currentType === 'privacypolicy'"
+        [class.border-transparent]="currentType !== 'privacypolicy'">
+        Privacy Policy
+      </button>
+      <button (click)="navigateTo('ukprivacypolicy')"
+        class="px-1 py-2 text-black font-semibold border-b-2 transition-colors duration-300"
+        [class.border-black]="currentType === 'ukprivacypolicy'"
+        [class.border-transparent]="currentType !== 'ukprivacypolicy'">
+        UK Privacy Policy
+      </button>
+      <button (click)="navigateTo('cookiepolicy')"
+        class="px-1 py-2 text-black font-semibold border-b-2 transition-colors duration-300"
+        [class.border-black]="currentType === 'cookiepolicy'"
+        [class.border-transparent]="currentType !== 'cookiepolicy'">
+        Cookie Policy
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="currentType === 'terms-of-use'">
+  <app-terms-of-use></app-terms-of-use>
+</div>
+<div *ngIf="currentType === 'privacypolicy'">
+  <app-privacy-policy></app-privacy-policy>
+</div>
+<div *ngIf="currentType === 'ukprivacypolicy'">
+  <app-uk-privacy-policy></app-uk-privacy-policy>
+</div>
+<div *ngIf="currentType === 'cookiepolicy'">
+  <app-cookie-policy></app-cookie-policy>
+</div>

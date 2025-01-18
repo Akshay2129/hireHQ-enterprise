@@ -1,0 +1,53 @@
+<div class="grid grid-cols-12 h-screen">
+  <!-- Left spacer for centering on larger screens -->
+  <div class="col-span-2 hidden sm:block"></div>
+
+  <!-- Main Content Container -->
+  <div class="col-span-12 md:col-span-6 flex justify-center items-center">
+    <div class="w-96">
+      <h2 class="text-lg font-semibold mb-2 text-gray-800">Verification code</h2>
+      <p class="text-sm text-gray-600 mb-6">
+        Enter the verification code sent to your email ID.
+      </p>
+
+      <!-- OTP Input Fields -->
+      <div class="flex justify-between mb-4">
+        <input
+          *ngFor="let digit of otpArray; let i = index"
+          [(ngModel)]="otp[i]"
+          id="otp-input-{{ i }}"
+          class="w-12 h-12 text-center border rounded text-lg focus:outline-none focus:ring-2 focus:ring-indigo-800"
+          maxlength="1"
+          (input)="onInput($event, i)"
+          (keydown)="onKeyDown($event, i)"
+          (paste)="onPaste($event)"
+          type="text"
+        />
+      </div>
+
+      <!-- Resend Link -->
+      <div class="text-sm text-gray-500 mb-6">
+        Code not received?
+        <button
+          class="text-indigo-600 hover:underline"
+          *ngIf="!resendCooldown"
+          (click)="resendOtp()"
+        >
+          Resend
+        </button>
+        <span *ngIf="resendCooldown" class="text-gray-500">
+          Resend in {{ resendTimer }}s
+        </span>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        class="w-full py-2 bg-indigo-950 text-white rounded font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
+        [disabled]="!isOtpComplete()"
+        (click)="submitOtp()"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>

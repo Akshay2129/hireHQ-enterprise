@@ -1,0 +1,68 @@
+<div class="flex items-center  justify-between py-1 w-full relative border-gray-300">
+    <div class="flex items-center flex-1 relative">
+        <i class="pi pi-search absolute text-gray-500 left-0 ml-2"></i>
+        <input type="text" placeholder="Search candidate by skill, profile title, education..."
+            class="w-full bg-transparent border-none rounded-lg pl-8 pr-4 py-2 text-sm text-gray-500 focus:outline-none focus:border-transparent" />
+    </div>
+
+    <div class="flex items-center gap-4">
+        <img src="images/message.svg" alt="msg" class="msg" />
+        <img src="images/bell.svg" alt="bell" class="bell" />
+        <div class="flex items-center space-x-2 cursor-pointer" (click)="toggleMenu()">
+            <div class="w-7 h-7 rounded-full overflow-hidden">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn9zilY2Yu2hc19pDZFxgWDTUDy5DId7ITqA&s"
+                    alt="Profile" class="w-full h-full object-cover" />
+            </div>
+        </div>
+        <i class="pi pi-chevron-down text-gray-500 cursor-pointer" (click)="toggleMenu()"></i>
+        <div>
+            <!-- Dropdown menu -->
+            @if (isOpen) {
+            <div class="absolute right-2 mt-9 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                <div class="flex items-center m-5">
+                    <div class="w-10 h-10 rounded-full overflow-hidden">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn9zilY2Yu2hc19pDZFxgWDTUDy5DId7ITqA&s"
+                            alt="Profile" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm font-medium text-gray-700">Profile Name</p>
+                        <p class="text-sm text-gray-500 truncate">useremailid&#64;example.com</p>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200"></div>
+                <ul class="py-2">
+                    <li>
+                        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="pi pi-users mr-2"></i> My Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="pi pi-users mr-2"></i> My Referrals
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="pi pi-headphones mr-2"></i> Feedback
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <i class="pi pi-cog mr-2"></i> Settings
+                        </a>
+                    </li>
+                    <li>
+                        
+                            <a (click)="logout()"
+                                class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                                <i class="pi pi-sign-out mr-2"></i> Logout
+                            </a>
+                       
+                    </li>
+                </ul>
+            </div>
+            }
+        </div>
+
+    </div>
+</div>

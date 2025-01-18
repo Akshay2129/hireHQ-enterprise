@@ -1,0 +1,265 @@
+<div class="bg-white font-sans rounded-lg">
+    <div class="container mx-auto p-0 border border-gray-400">
+        <div class="p-6">
+            <!-- Education Requirements -->
+            <h2 class="text-indigo-950 font-semibold">Education Requirements</h2>
+            <hr class="mb-3">
+            <form [formGroup]="jobQualificationForm" (ngSubmit)="onSubmit()">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm">
+                            <span class="text-red-600">*</span> Level Of Education
+                        </label>
+                        <select formControlName="educationLevel"
+                            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 text-gray-400 focus:ring-indigo-500">
+                            <option value="" disabled>Select Level of Education</option>
+                            <option value="Doctorate">Doctorate</option>
+                            <option value="Masters">Masters</option>
+                            <option value="Bachelors">Bachelors</option>
+                            <option value="Associate">Associate</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm">Name of Degree</label>
+                        <input type="text" placeholder="Enter degree name" formControlName="degreeName"
+                            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm">
+                            <span class="text-red-600">*</span> Job Category
+                        </label>
+                        <select formControlName="jobCategory"
+                            class="w-full p-2 border mt-1 rounded-md focus:outline-none focus:ring-2 text-gray-400 focus:ring-indigo-500">
+                            <option value="" disabled>Select Job Category</option>
+                            <option value="category1">Category 1</option>
+                            <option value="category2">Category 2</option>
+                            <option value="category3">Category 3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Experience Requirements -->
+                <h2 class="text-indigo-950 font-semibold mt-2 mb-3">Experience Requirements</h2>
+                <hr class="mb-3">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm">
+                            <span class="text-red-600">*</span> Seniority Level
+                        </label>
+                        <select formControlName="seniorityLevel"
+                            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 text-gray-400 focus:ring-indigo-500">
+                            <option value="" disabled>Select Seniority Level</option>
+                            <option value="junior">Junior</option>
+                            <option value="mid">Mid</option>
+                            <option value="senior">Senior</option>
+                            <option value="lead">Lead</option>
+                        </select>
+                    </div>
+
+
+
+                    <!-- <div>
+                        <label class="block text-gray-700 text-sm">External Job ID</label>
+                        <input type="text" placeholder="Enter external job ID" formControlName="externalJobId"
+                            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm"><span class="text-red-600">*</span> Job Title</label>
+                        <input type="text" placeholder="Enter job title" formControlName="jobTitle"
+                            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                    </div> -->
+                    <div>
+                        <label class="block text-gray-700 text-sm"><span class="text-red-600">*</span> Minimum Work
+                            Experience</label>
+                        <input type="text" placeholder="Enter minimum work experience"
+                            formControlName="minWorkExperience"
+                            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm"><span class="text-red-600">*</span> Maximum Work
+                            Experience</label>
+                        <input type="text" placeholder="Enter maximum work experience"
+                            formControlName="maxWorkExperience"
+                            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                    </div>
+                </div>
+
+                <!-- Job Specifications -->
+                <h2 class="text-indigo-950 font-semibold mt-2 mb-3">Job Specifications</h2>
+                <hr class="mb-3">
+                <div class="grid grid-cols-12 gap-4">
+                    <!-- First Div: Spanning 8 columns -->
+                    <div class="col-span-12 md:col-span-8 pt-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Start Date Input -->
+                            <div>
+                                <label class="block text-gray-700 text-sm"><span class="text-red-600">*</span> Start
+                                    Date</label>
+                                <input type="date" formControlName="startDate"
+                                    class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                            </div>
+
+                            <!-- End Date Input -->
+                            <div>
+                                <label class="block text-gray-700 text-sm"><span class="text-red-600">*</span> End
+                                    Date</label>
+                                <input type="date" formControlName="endDate"
+                                    class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second Div: Spanning 4 columns -->
+                    <div class="col-span-12 md:col-span-4 p-4 text-white">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm">
+                                    Contract Duration
+                                </label>
+                                <input type="text" placeholder="Enter number" formControlName="contractDuration"
+                                    class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                            </div>
+
+                            <div>
+                                <label class="block text-white text-sm">
+                                    Select
+                                </label>
+                                <select formControlName="frequency"
+                                    class="w-full p-2 border mt-1 rounded-md focus:outline-none focus:ring-2 text-gray-400 focus:ring-indigo-500">
+                                    <option value="" disabled selected>Select frequency</option>
+                                    <option value="category1">Day(s)</option>
+                                    <option value="category2">Week(s)</option>
+                                    <option value="category3">Month(s)</option>
+                                    <option value="category3">Year(s)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Number of Openings -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm">Number of Openings</label>
+                        <input type="text" placeholder="Enter number of openings" formControlName="numberOfOpenings"
+                            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm">Limit for Application </label>
+                        <input type="text" placeholder="Enter application limit" formControlName="applicationLimit"
+                            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm">Limit for Shortlist</label>
+                        <input type="text" placeholder="Enter shortlist limit" formControlName="shortlistLimit"
+                            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                    </div>
+                </div>
+
+                <!-- Job Status -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                    <div>
+                        <label class="block text-gray-700 text-sm"><span class="text-red-600">*</span> Job
+                            Status</label>
+                        <select formControlName="jobStatus"
+                            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 text-gray-400 focus:ring-indigo-500">
+                            <option value="" disabled>Select Job Status</option>
+                            <option value="Open">Open</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Canceled">Canceled</option>
+                            <option value="Hold">Hold</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm">Social Media URL</label>
+                        <input type="url" placeholder="Enter social media URL" formControlName="socialMediaUrl"
+                            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="p-3">
+            <div class="container mx-auto p-2 border border-gray-400">
+                <div class="text-indigo-950 font-semibold text-md flex items-center justify-between">Job Specifications
+                    <!-- Toggle Switch -->
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" [(ngModel)]="isJobManagerChecked" class="sr-only peer">
+                        <div
+                            class="w-12 h-6 bg-gray-300 rounded-full peer peer-checked:bg-indigo-950 peer-focus:ring-1 peer-focus:ring-indigo-950 transition">
+                            <span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all"
+                                [ngClass]="{'translate-x-6': isJobManagerChecked}"></span>
+                        </div>
+                        <!-- Checked Icon -->
+                        <svg *ngIf="isJobManagerChecked" xmlns="http://www.w3.org/2000/svg"
+                            class="absolute w-4 h-4 text-white left-2 top-1.5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <!-- Unchecked Icon -->
+                        <svg *ngIf="!isJobManagerChecked" xmlns="http://www.w3.org/2000/svg"
+                            class="absolute w-4 h-4 text-white right-2 top-1.5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </label>
+
+                </div>
+                <div>
+                    <div class="text-sm">
+                        Enable this option to include an interview process for the job.
+                    </div>
+                    <hr class="mb-3 mt-3">
+
+                </div>
+                <div class="text-indigo-950 font-semibold text-md flex items-center justify-between">Flexible Interview
+                    Progress
+                    <!-- Toggle Switch -->
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" [(ngModel)]="isFlexiableInterViewChecked" class="sr-only peer">
+                        <div
+                            class="w-12 h-6 bg-gray-300 rounded-full peer peer-checked:bg-indigo-950 peer-focus:ring-1 peer-focus:ring-indigo-950 transition">
+                            <span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all"
+                                [ngClass]="{'translate-x-6': isFlexiableInterViewChecked}"></span>
+                        </div>
+                        <!-- Checked Icon -->
+                        <svg *ngIf="isFlexiableInterViewChecked" xmlns="http://www.w3.org/2000/svg"
+                            class="absolute w-4 h-4 text-white left-2 top-1.5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <!-- Unchecked Icon -->
+                        <svg *ngIf="!isFlexiableInterViewChecked" xmlns="http://www.w3.org/2000/svg"
+                            class="absolute w-4 h-4 text-white right-2 top-1.5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </label>
+
+                </div>
+                <div>
+                    <div class="text-sm">
+                        Limit The Interview Process with Just one failure.
+                    </div>
+                    <hr class="mb-3 mt-3">
+
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="flex justify-between p-6">
+            <p class="px-6 py-2 bg-indigo-950 text-white rounded-md cursor-pointer">Preview</p>
+
+            <div class="flex space-x-4">
+                <p class="px-6 py-2 text-gray-800 hover:bg-gray-400 rounded-md cursor-pointer" (click)="onBack()">Back
+                </p>
+                <button class="px-6 py-2 bg-indigo-950 text-white rounded-md" (click)="onSubmit()"
+                    type="submit">Next</button>
+            </div>
+        </div>
+    </div>
+</div>

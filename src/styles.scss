@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.button {
+  background-color: #150349;
+}
+
+.toast-success .toast-icon,
+.toast-error .toast-icon,
+.toast-warning .toast-icon,
+.toast-info .toast-icon,
+.toast-default .toast-icon {
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.toast-message {
+  margin-top: 3px;
+  font-size: 15px;
+}
